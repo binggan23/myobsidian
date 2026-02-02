@@ -5,4 +5,4 @@ git init //把这个目录变成Git可以管理的仓库
 　　git remote add origin git@github.com:wangjiax9/practice.git //关联远程仓库
 　　git push -u origin master //把本地库的所有内容推送到远程库上
 
-git pull origin master
+git pull origin master//同步到别的设备
