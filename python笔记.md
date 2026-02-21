@@ -25,7 +25,7 @@ cover: https://wallpaperaccess.com/full/1672441.png
 
 本笔记中将全部使用**增删改查的方式**展示
 
-**增**: list.append(值)
+**增**: list.append(值)，list.extend(列表)#在末尾追加一个列表
 **删**: list.pop(位置) **不能多选位置？**
 list.remove(值)**删除第一个出现的该值** 
 del list[0]删除开头**一般给list作为tree或者队列的时候使用**
