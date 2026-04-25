@@ -172,3 +172,20 @@ int main(void){
 这个LED灯有点问题
 这个灯 长的是正极，短的是负极，我第一次安装就安装错了
 ![[嵌入式开发7.png]]
+接下来需要查看函数在stm32f10x_gpio.h有gpio的定义，在... _ rcc.h中有rcc的定义
+```c
+void RCC_AHBPeriphClockCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState);
+void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState);
+void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState);
+这三个是常用的rcc
+
+GPIO_InitTypeDef是GPIO定义的结构体
+```
+接着是LED闪烁，我使用的江科大的那个大佬自己做的，他课程里没讲什么，先插个眼
+然后研究了开漏输出和推挽输出的区别
+当使用推挽输出
+将LED灯位置切换为长脚(正极)在p0，短脚(负极)在负极的情况，这个时候是高电平驱动
+`GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;`依然可以使用
+这说明委婉输出在高低电平都有效
+开漏输出时高电平却没有输出能力，因为开漏输出是高阻态，高阻态的高电平是没有驱动能力的
+注意IO口不能并联
