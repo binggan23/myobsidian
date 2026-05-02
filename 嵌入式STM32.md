@@ -189,3 +189,56 @@ GPIO_InitTypeDef是GPIO定义的结构体
 这说明委婉输出在高低电平都有效
 开漏输出时高电平却没有输出能力，因为开漏输出是高阻态，高阻态的高电平是没有驱动能力的
 注意IO口不能并联
+高级点的灯哈哈哈
+```c
+#include "stm32f10x.h"                  // Device header
+#include "Delay.h"
+
+int main(void){
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_All;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
+	GPIO_Init(GPIOA,&GPIO_InitStructure);
+	//GPIO_ResetBits(GPIOA,GPIO_Pin_0);//开启
+	//GPIO_SetBits(GPIOA,GPIO_Pin_0);//关闭
+	//GPIO_WriteBit(GPIOA,GPIO_Pin_0,Bit_SET);//通过第三个参数决定关闭还是打开
+	int tmp = 0x0001;
+	while(1){
+		GPIO_Write(GPIOA,~tmp);
+		Delay_ms(500);
+		tmp=tmp<<1;
+		if (tmp>=0x0080){
+			tmp = 0x0001;
+		}
+
+	}
+}
+
+```
+在这里，0x001就是p0口
+上面的GPIO_Pin_All，是所有端口推挽输出，和江科大的程序有点出入，因为我用了按位左移
+## 蜂鸣器
+```c
+#include "stm32f10x.h"                  // Device header
+#include "Delay.h"
+
+int main(void){
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
+	
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOB,&GPIO_InitStructure);
+	while(1){
+		GPIO_ResetBits(GPIOB,GPIO_Pin_12);
+		Delay_ms(500);
+		GPIO_SetBits(GPIOB,GPIO_Pin_12);
+		Delay_ms(500);
+	}
+}
+
+```
