@@ -155,3 +155,10 @@ while not st.empty():
 **排**: 哒咩
 **反**: 哒咩
 **计**: st.\__sizeof__()
+
+## 代码模板
+int转list
+```python
+num = 123
+nums = list(map(int,str(num)))
+```

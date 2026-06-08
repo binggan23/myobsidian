@@ -216,11 +216,30 @@ class 类型 名词{}
 public 类名(内容){内容}
 java没有析构，因为java有自动释放
 
+# 继承
+## 定义
 
+## 使用
+extend就是语法，有两个关键字
+一个是super->可以用来继承父类属性
+public 构造函数(){
+	super(父类);
+}
+重写 @override ....
+final 修饰 “最终” 不可被继承的类
+# 抽象类
+## 定义
 
-
-
+## 使用
+public abstract class 名
+抽象类里面
+解决知道要做，但是不知道怎么做的情况
 # 接口
 ## 定义
+interface
 一种限制的类，这种类不能实现具体，没有构造函数
 只能是public
+接口中定义的变量都是静态常量(static final类型)有个小技巧(斜体)
+所以需要初始化，一定是public
+然后定义的方法，也都是public abstract类型的
+# 异常
